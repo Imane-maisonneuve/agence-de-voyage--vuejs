@@ -1,30 +1,53 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="max-w-6xl mx-auto">
+    <MainHeader />
+    <router-view
+      :voyages="voyages"
+      :addInv="addVoyages"
+      :updateInv="updateVoyages"
+      :removeInv="removeVoyages"
+    />
+
+    <MainFooter />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script>
+import MainFooter from "./components/MainFooter.vue";
+import MainHeader from "./components/MainHeader.vue";
+import VoyageDataService from "./services/VoyageDataService";
+
+export default {
+  created() {},
+  mounted() {
+    VoyageDataService.getAll()
+      .then((res) => {
+        this.voyages = res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  components: {
+    MainHeader,
+    MainFooter,
+  },
+  data() {
+    return {
+      voyages: [],
+    };
+  },
+  methods: {
+    addVoyages(voyage) {
+      this.voyages.push(voyage);
+    },
+    updateVoyages(index, data) {
+      this.voyages[index] = data;
+      // console.log(data)
+    },
+    removeVoyages(index) {
+      this.voyages.splice(index, 1);
+    },
+  },
+};
+</script>
