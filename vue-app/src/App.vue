@@ -43,7 +43,6 @@ export default {
     },
     updateVoyages(index, data) {
       this.voyages[index] = data;
-      // console.log(data)
     },
     removeVoyages(index) {
       this.voyages.splice(index, 1);

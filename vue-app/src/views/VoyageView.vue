@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t border-gray-100">
+  <div class="min-h-screen border-t border-gray-100">
     <section v-if="voyage" class="py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="flex flex-col lg:flex-row items-center lg:items-start">
@@ -44,14 +44,12 @@ export default {
       const voyage = this.voyages.find((p) => {
         return p.id === Number(this.$route.params.id);
       });
-      //console.log(voyage);
       return voyage;
     },
     voyageIndex() {
       const index = this.voyages.findIndex((p) => {
         return p.id === Number(this.$route.params.id);
       });
-      //console.log(voyage);
       return index;
     },
   },

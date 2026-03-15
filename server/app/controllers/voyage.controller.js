@@ -8,7 +8,9 @@ exports.findAll = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving voyages.",
+        message:
+          err.message ||
+          "Une erreur s'est produite lors de la récupération des voyages.",
       });
     });
 };
@@ -16,7 +18,25 @@ exports.findAll = (req, res) => {
 exports.create = (req, res) => {
   if (!req.body.name) {
     res.status(400).send({
-      message: "The name is mandatory",
+      message: "Le nom du voyage est obligatoire",
+    });
+    return;
+  }
+  if (!req.body.description) {
+    res.status(400).send({
+      message: "La description du voyage est obligatoire",
+    });
+    return;
+  }
+  if (!req.body.price) {
+    res.status(400).send({
+      message: "Le prix du voyage est obligatoire",
+    });
+    return;
+  }
+  if (!req.body.category) {
+    res.status(400).send({
+      message: "La catégorie du voyage est obligatoire",
     });
     return;
   }
@@ -26,7 +46,7 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not insert data.",
+        message: "L'insertion des données a échoué.",
       });
     });
 };
@@ -39,7 +59,7 @@ exports.findOne = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not find the data.",
+        message: "Les données sont introuvables.",
       });
     });
 };
@@ -52,17 +72,17 @@ exports.update = (req, res) => {
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Voyage updated",
+          message: "Voyage mis à jour",
         });
       } else {
         res.send({
-          message: "Voyage not found",
+          message: "Le voyage n'a pas été trouvé",
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not update the data.",
+        message: "Echec de la mise à jour.",
       });
     });
 };
@@ -75,17 +95,17 @@ exports.delete = (req, res) => {
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Voyage deleted",
+          message: "Voyage supprimé",
         });
       } else {
         res.send({
-          message: "Voyage not found",
+          message: "Voyage introuvable",
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete the data.",
+        message: "Echec de la supression.",
       });
     });
 };

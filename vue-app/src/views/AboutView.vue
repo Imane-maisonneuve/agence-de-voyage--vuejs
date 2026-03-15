@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 max-w-3xl mx-auto">
+  <div class="min-h-screen border-t border-gray-100 mb-10 p-10 px-10">
     <p class="mb-3">
       Depuis notre création, nous avons pour mission de faire de chaque voyage
       une expérience unique et inoubliable. Que vous rêviez de
@@ -12,7 +12,7 @@
 
     <p class="mb-3">
       Nous croyons que
-      <strong>voyager, c’est découvrir le monde autrement</strong>, et nous nous
+      <strong>voyager, c'est découvrir le monde autrement</strong>, et nous nous
       engageons à vous offrir des services personnalisés, fiables et faciles à
       réserver. Notre passion pour le voyage se reflète dans la qualité de nos
       forfaits et dans notre accompagnement attentif à chaque étape de votre

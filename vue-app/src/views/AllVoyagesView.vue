@@ -81,19 +81,25 @@ export default {
       message: null,
       submitted: false,
       voyage: {},
+      id: parseInt(this.$route.params.id),
     };
   },
   methods: {
-    deleteVoyage(id) {
+    deleteVoyage(id, i) {
       VoyageDataService.delete(id)
         .then((response) => {
-          this.removeInv(this.voyageIndex);
+          this.removeInv(i);
           this.$router.push({ name: "allVoyages" });
         })
         .catch((e) => {
           this.message = e.response.data.message;
         });
     },
+  },
+  mounted() {
+    VoyageDataService.get(this.id).then((response) => {
+      this.voyage = response.data;
+    });
   },
   computed: {
     voyageIndex() {
