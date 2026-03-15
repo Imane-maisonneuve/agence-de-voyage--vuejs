@@ -1,20 +1,16 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center border-t border-gray-100"
+    class="min-h-screen flex items-center justify-center border-t border-gray-100 mb-10 px-10"
   >
-    <div class="border mt-2 p-6 rounded-md w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
+    <div class="border mt-2 p-6 rounded-md w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
       <div v-show="message" class="bg-red-500 mb-2 text-white p-2 rounded">
         {{ message }}
       </div>
-      <h2 class="text-2xl font-semibold mb-6">Add New Voyage</h2>
+      <h2 class="text-2xl font-semibold mb-6">Ajouter un nouveau Voyage</h2>
       <div v-if="!submitted">
         <form>
           <div class="mb-4">
-            <label
-              for="voyageName"
-              class="block text-sm font-medium text-gray-700"
-              >Voyage Name</label
-            >
+            <label>Nom du voyage</label>
             <input
               v-model="voyage.name"
               type="text"
@@ -24,87 +20,69 @@
             />
           </div>
           <div class="mb-4">
-            <label
-              for="voyagePhoto"
-              class="block text-sm font-medium text-gray-700"
-              >Voyage Photo</label
-            >
-            <input
-              v-model="voyage.photo"
-              type="text"
-              id="voyagePhoto"
-              class="mt-1 p-2 border w-full rounded-md"
+            <label>Description du voyage </label>
+            <textarea
+              v-model="voyage.description"
+              id="voyageDescription"
+              class="mt-1 p-2 border w-full rounded-md h-40"
               required
-            />
+            ></textarea>
           </div>
           <div class="mb-4">
-            <label
-              for="voyagePrice"
-              class="block text-sm font-medium text-gray-700"
-              >Price (CAD)</label
-            >
+            <label>Prix du forfait (CAD)</label>
             <input
               v-model.number="voyage.price"
-              type="text"
+              type="number"
               id="voyagePrice"
               class="mt-1 p-2 border w-full rounded-md"
               required
             />
           </div>
           <div class="mb-4">
-            <label
-              for="voyageDescription"
-              class="block text-sm font-medium text-gray-700"
-              >Voyage Description</label
-            >
-            <textarea
-              v-model="voyage.description"
-              id="voyageDescription"
+            <label>Image du voyage</label>
+            <input
+              v-model="voyage.imageUrl"
+              type="text"
+              id="voyagePhoto"
               class="mt-1 p-2 border w-full rounded-md"
               required
-            ></textarea>
+            />
           </div>
+
           <div class="mb-4">
-            <label
-              for="voyageType"
-              class="block text-sm font-medium text-gray-700"
-              >Voyage Type</label
-            >
+            <label>Catégorie</label>
             <select
-              v-model="voyage.type"
-              id="voyageType"
+              v-model="voyage.category"
+              id="voyageCategory"
               class="mt-1 p-2 border w-full rounded-md"
               required
             >
-              <option value="">Select</option>
-              <option value="Footwear">Footwear</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Home Decor">Home Decor</option>
-              <option value="Footwear">Footwear</option>
-              <option value="Beauty">Beauty</option>
-              <option value="Travel Accessories">Travel Accessories</option>
-              <option value="Fashion">Fashion</option>
+              <option value="">Sélectionner une catégorie</option>
+              <option value="Plage">Plage</option>
+              <option value="Culture">Culture</option>
+              <option value="Aventure">Aventure</option>
             </select>
           </div>
           <div class="mb-6">
             <button
               type="button"
               @click="saveVoyage"
-              class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+              class="w-full bg-gray-700 text-white p-2 rounded-md hover:bg-gray-800 mt-4"
             >
-              Save
+              Sauvegarder
             </button>
           </div>
         </form>
       </div>
       <div v-else>
-        <div class="text-green-600 font-semibold mb-4">Success Message</div>
+        <div class="text-green-600 font-semibold mb-4">
+          Voyage ajouté avec succès
+        </div>
         <button
           @click="newVoyage"
-          class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600"
+          class="w-full bg-gray-700 text-white p-2 rounded-md hover:bg-gray-800 mt-4"
         >
-          New Voyage
+          Nouveau Voyage
         </button>
       </div>
     </div>
@@ -121,21 +99,17 @@ export default {
       submitted: false,
       voyage: {
         name: "",
-        photo:
-          "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
-        price: "",
         description: "",
-        type: "",
+        price: "",
+        imageUrl: "/assets/Italy.jpg",
+        category: "",
       },
     };
   },
   methods: {
     saveVoyage() {
-      // console.log(this.voyage)
       VoyageDataService.create(this.voyage)
         .then((response) => {
-          //console.log(this.voyage, response.data)
-          // this.addInvresponse.data)
           this.voyage.id = response.data.id;
           this.addInv(this.voyage);
           this.message = null;
@@ -149,11 +123,10 @@ export default {
       this.submitted = false;
       this.voyage = {
         name: "",
-        photo:
-          "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
-        price: "",
         description: "",
-        type: "",
+        price: "",
+        imageUrl: "/assets/Italy.jpg",
+        category: "",
       };
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-3 gap-4 my-6">
       <div
         v-for="(voyage, i) in voyages"
         :key="i"

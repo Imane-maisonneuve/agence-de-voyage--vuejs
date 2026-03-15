@@ -8,7 +8,7 @@
       >
     </div>
 
-    <div class="grid grid-cols-3 gap-4 my-4">
+    <div class="grid grid-cols-3 gap-4 my-6">
       <div
         v-for="(voyage, i) in voyages"
         :key="i"
@@ -38,7 +38,7 @@
             </h5>
             <button
               type="button"
-              class="text-red-600 cursor-pointer ml-auto p-2"
+              class="text-blue-600 cursor-pointer ml-auto p-2"
             >
               <router-link
                 :to="{ name: 'edit-voyage', params: { id: voyage.id } }"
@@ -60,19 +60,7 @@
             Catégorie : {{ voyage.category }}
           </p>
         </div>
-        <div class="flex items-center">
-          <!-- <button
-            type="button"
-            @click="updateVoyage(voyage.id, voyage, i)"
-            class="text-red-600 cursor-pointer ml-auto p-2"
-          >
-            <PencilIcon class="w-5 h-5" />
-            <router-link
-              :to="{ name: 'edit-voyage', params: { id: voyage.id } }"
-              class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            ></router-link>
-          </button> -->
-        </div>
+        <div class="flex items-center"></div>
       </div>
     </div>
   </div>
@@ -96,17 +84,6 @@ export default {
     };
   },
   methods: {
-    // updateVoyage(id, voyage, i) {
-    //   VoyageDataService.update(id, voyage)
-    //     .then((response) => {
-    //       this.updateInv(i, voyage);
-    //       this.message = null;
-    //       this.submitted = true;
-    //     })
-    //     .catch((e) => {
-    //       this.message = e.response.data.message;
-    //     });
-    // },
     deleteVoyage(id) {
       VoyageDataService.delete(id)
         .then((response) => {
