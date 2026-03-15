@@ -14,14 +14,12 @@ const routes = [
     path: "/add-voyage",
     name: "add-voyage",
     component: AddVoyageView,
-    meta: { requiresAuth: true },
   },
   { path: "/voyage/:id", name: "voyage", component: VoyageView },
   {
     path: "/edit-voyage/:id",
     name: "edit-voyage",
     component: EditVoyageView,
-    meta: { requiresAuth: true },
   },
 ];
 
